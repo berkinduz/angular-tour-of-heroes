@@ -7,8 +7,8 @@ import {HEROES} from './mock-heroes'
 @Injectable({
   providedIn: 'root'
 })
-export class HeroService {
 
+export class HeroService {
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
     return heroes;
