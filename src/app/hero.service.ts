@@ -35,6 +35,7 @@ export class HeroService {
    );
   }
 
+  
   getHero(id: number): Observable<Hero>{
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
@@ -43,6 +44,18 @@ export class HeroService {
     )
   }
 
+  updateHero(hero: Hero): Observable<any>{
+    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>(`updateHero`))
+    )
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type' : 'application/json'
+    })
+  }
   /**
  * Handle Http operation that failed.
  * Let the app continue.
